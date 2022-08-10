@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BaccoApp.UserManagement.Domain\BaccoApp.UserManagement.Domain.csproj" />
+      <ProjectReference Include="..\BaccoApp.UserManagement.Infrastructure\BaccoApp.UserManagement.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

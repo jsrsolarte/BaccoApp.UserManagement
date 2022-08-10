@@ -1,9 +1,21 @@
+using BaccoApp.UserManagement.Domain.Ports;
+using BaccoApp.UserManagement.Infrastructure;
+using BaccoApp.UserManagement.Infrastructure.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var config = builder.Configuration;
+
+if (builder.Environment.IsEnvironment("Development"))
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddPersistence(config);
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
