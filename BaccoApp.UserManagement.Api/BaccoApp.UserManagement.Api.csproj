@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>18527fd9-9b75-4015-baeb-1e07cbd10dda</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,6 +14,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\BaccoApp.UserManagement.Domain\BaccoApp.UserManagement.Domain.csproj" />
+      <ProjectReference Include="..\BaccoApp.UserManagement.Infrastructure\BaccoApp.UserManagement.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
