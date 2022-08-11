@@ -1,5 +1,6 @@
 ﻿using Ardalis.Specification;
 using BaccoApp.UserManagement.Domain.Entities;
+using BaccoApp.UserManagement.Domain.Entities.Base;
 
 namespace BaccoApp.UserManagement.Domain.Ports;
 
