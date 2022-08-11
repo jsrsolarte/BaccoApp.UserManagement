@@ -6,10 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 
-if (builder.Environment.IsEnvironment("Development"))
-{
-    builder.Configuration.AddUserSecrets<Program>();
-}
+if (builder.Environment.IsEnvironment("Development")) builder.Configuration.AddUserSecrets<Program>();
+
 
 builder.Services.AddControllers();
 
@@ -27,6 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseRouting().UseEndpoints(endpoints => { endpoints.MapHealthChecks("/health"); });
 
 app.UseHttpsRedirection();
 

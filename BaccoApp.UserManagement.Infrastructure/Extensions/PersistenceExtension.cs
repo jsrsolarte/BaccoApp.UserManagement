@@ -16,7 +16,7 @@ public static class PersistenceExtension
             _.EnableRetryOnFailure(3, TimeSpan.FromSeconds(10), null);
             _.MigrationsHistoryTable("_MigrationHistory", schemaName);
         }));
-
+        svc.AddHealthChecks().AddSqlServer(connectionString);
         return svc;
     }
 }

@@ -5,7 +5,7 @@ namespace BaccoApp.UserManagement.Domain.Ports;
 
 public interface IReadRepository<T, in TId> where T: IEntityBase<TId>
 {
-    Task<T?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
+    Task<T?> GetByIdAsync(object id, CancellationToken cancellationToken = default);
 
     Task<T?> GetBySpecAsync(ISpecification<T> specification, CancellationToken cancellationToken = default);
 

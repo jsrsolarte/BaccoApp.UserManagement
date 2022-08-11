@@ -10,15 +10,15 @@ public class ReadRepository<T, TId> : IReadRepository<T, TId> where T : EntityBa
     private readonly DbContext _dbContext;
     private readonly ISpecificationEvaluator _specificationEvaluator;
 
-    public ReadRepository(DbContext dbContext, ISpecificationEvaluator specificationEvaluator)
+    protected ReadRepository(DbContext dbContext, ISpecificationEvaluator specificationEvaluator)
     {
         _dbContext = dbContext;
         _specificationEvaluator = specificationEvaluator;
     }
 
-    public async Task<T?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
+    public async Task<T?> GetByIdAsync(object id, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Set<T>().FindAsync(id, cancellationToken);
+        return await _dbContext.Set<T>().FindAsync(new[] { id }, cancellationToken: cancellationToken);
     }
 
     public async Task<T?> GetBySpecAsync(ISpecification<T> specification, CancellationToken cancellationToken = default)
