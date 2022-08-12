@@ -1,5 +1,4 @@
-﻿using BaccoApp.UserManagement.Domain.Entities;
-using BaccoApp.UserManagement.Domain.Entities.Base;
+﻿using BaccoApp.UserManagement.Domain.Entities.Base;
 using BaccoApp.UserManagement.Domain.Ports;
 
 namespace BaccoApp.UserManagement.Infrastructure;

@@ -11,10 +11,10 @@ public static class PersistenceExtension
         var connectionString = config.GetValue<string>("Database:ConnectionString");
         var schemaName = config.GetValue<string>("Database:SchemaName");
 
-        svc.AddDbContext<PersistenceContext>(_ => _.UseSqlServer(connectionString, _ =>
+        svc.AddDbContext<PersistenceContext>(_ => _.UseSqlServer(connectionString, optionsBuilder =>
         {
-            _.EnableRetryOnFailure(3, TimeSpan.FromSeconds(10), null);
-            _.MigrationsHistoryTable("_MigrationHistory", schemaName);
+            optionsBuilder.EnableRetryOnFailure(3, TimeSpan.FromSeconds(10), null);
+            optionsBuilder.MigrationsHistoryTable("_MigrationHistory", schemaName);
         }));
         svc.AddHealthChecks().AddSqlServer(connectionString);
         svc.BuildServiceProvider().GetRequiredService<PersistenceContext>().Database.Migrate();
