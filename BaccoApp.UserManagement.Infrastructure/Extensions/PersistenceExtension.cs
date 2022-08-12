@@ -17,6 +17,7 @@ public static class PersistenceExtension
             _.MigrationsHistoryTable("_MigrationHistory", schemaName);
         }));
         svc.AddHealthChecks().AddSqlServer(connectionString);
+        svc.BuildServiceProvider().GetRequiredService<PersistenceContext>().Database.Migrate();
         return svc;
     }
 }
