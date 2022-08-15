@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BaccoApp.UserManagement.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,5 +20,16 @@ public static class PersistenceExtension
         svc.AddHealthChecks().AddSqlServer(connectionString);
         svc.BuildServiceProvider().GetRequiredService<PersistenceContext>().Database.Migrate();
         return svc;
+    }
+
+    public static void Seed(this ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = new Guid("DC12BB04-D629-4D8E-A023-5A8644F7F298"),
+            FirstName = "Juan",
+            LastName = "Ramirez",
+            Email = "jr@correo.com"
+        });
     }
 }

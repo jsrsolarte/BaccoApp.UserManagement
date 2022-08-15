@@ -1,4 +1,5 @@
 ﻿using BaccoApp.UserManagement.Domain.Entities;
+using BaccoApp.UserManagement.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -27,6 +28,7 @@ public class PersistenceContext : DbContext
             entity.AddProperty("UpdatedDate", typeof(DateTime));
         }
 
+        modelBuilder.Seed();
         base.OnModelCreating(modelBuilder);
     }
 
