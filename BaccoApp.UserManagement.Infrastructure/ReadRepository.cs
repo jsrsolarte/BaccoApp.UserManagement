@@ -1,5 +1,4 @@
 ﻿using Ardalis.Specification;
-using BaccoApp.UserManagement.Domain.Entities;
 using BaccoApp.UserManagement.Domain.Entities.Base;
 using BaccoApp.UserManagement.Domain.Ports;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +18,7 @@ public class ReadRepository<T, TId> : IReadRepository<T, TId> where T : EntityBa
 
     public async Task<T?> GetByIdAsync(object id, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Set<T>().FindAsync(new[] { id }, cancellationToken: cancellationToken);
+        return await _dbContext.Set<T>().FindAsync(new[] { id }, cancellationToken);
     }
 
     public async Task<T?> GetBySpecAsync(ISpecification<T> specification, CancellationToken cancellationToken = default)
