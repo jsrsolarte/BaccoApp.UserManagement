@@ -9,10 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-appsettings.Local.json
-.vscode
-script.sql
-global.json
+.sonarlint/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -253,7 +250,6 @@ ServiceFabricBackup/
 *.mdf
 *.ldf
 *.ndf
-*.sql
 
 # Business Intelligence projects
 *.rdl.data
@@ -344,4 +340,7 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
+.vscode
+*.info
 
+StrykerOutput/
