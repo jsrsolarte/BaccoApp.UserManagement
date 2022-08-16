@@ -5,6 +5,7 @@ namespace BaccoApp.UserManagement.Infrastructure.Specification;
 public class SpecificationEvaluator : ISpecificationEvaluator
 {
     private readonly List<IEvaluator> _evaluators = new();
+    public static SpecificationEvaluator Default { get; } = new SpecificationEvaluator();
 
     public SpecificationEvaluator()
     {
