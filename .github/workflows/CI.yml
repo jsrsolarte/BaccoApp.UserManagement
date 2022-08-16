@@ -6,8 +6,9 @@ on:
     branches: [ "master", "develop" ]
 
 env:
+  SOLUTION_NAME: BaccoApp.UserManagement
   PROJECT_NAME: user-management
-  ORGANIZATION: baccoapp
+  ORGANIZATION_SONARCLOUD: baccoapp
 
 jobs:
   sonarcloud:
@@ -44,12 +45,13 @@ jobs:
       - name: Build
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_NAME }}" /o:"${{ env.ORGANIZATION }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build SomeConsoleApplication.sln
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_NAME }}" /o:"${{ env.ORGANIZATION_SONARCLOUD }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build ${{ env.SOLUTION_NAME }}.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"        
 
   build:
-
+    name: Build and Push to GCR
+    needs: [sonarcloud]
     runs-on: ubuntu-latest
     
     steps:
