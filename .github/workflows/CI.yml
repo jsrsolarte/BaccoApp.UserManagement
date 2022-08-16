@@ -20,4 +20,6 @@ jobs:
         project_id: baccoapp-358901
         image_name: user-management-${{ github.ref_name }}
         image_tag: latest,${{ github.run_number }}
+        dockerfile: ./BaccoApp.UserManagement.Api/Dockerfile
+        context: ./BaccoApp.UserManagement.Api
     
