@@ -48,9 +48,9 @@ jobs:
       - name: Build
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_NAME }}" /o:"${{ env.ORGANIZATION_SONARCLOUD }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_NAME }}" /o:"${{ env.ORGANIZATION_SONARCLOUD }}" /d:sonar.qualitygate.wait=true /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build ${{ env.SOLUTION_NAME }}.sln
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.qualitygate.wait=true        
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"        
 
   build:
     name: Build and Push to GCR
