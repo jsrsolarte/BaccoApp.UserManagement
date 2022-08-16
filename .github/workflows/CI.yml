@@ -15,8 +15,8 @@ jobs:
     - uses: RafikFarhad/push-to-gcr-github-action@v4.1
       with:
         gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text
-        registry: gcr.io
-        project_id: my-awesome-project
+        registry: us-east1-docker.pkg.dev/baccoapp-358901/gcr-baccoapp
+        project_id: baccoapp-358901
         image_name: user-management-${{ github.ref_name }}
         image_tag: latest,${{ github.run_number }}
     
