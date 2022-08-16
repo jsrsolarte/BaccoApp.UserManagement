@@ -1,5 +1,4 @@
-using BaccoApp.UserManagement.Domain.Ports;
-using BaccoApp.UserManagement.Infrastructure;
+using BaccoApp.UserManagement.Api.Filters;
 using BaccoApp.UserManagement.Infrastructure.Extensions;
 using MediatR;
 using System.Reflection;
@@ -15,7 +14,7 @@ if (builder.Environment.IsEnvironment("Development")) builder.Configuration.AddU
 builder.Services.AddMediatR(applicationAssembly, typeof(Program).Assembly);
 builder.Services.AddAutoMapper(applicationAssembly);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opts => opts.Filters.Add(typeof(AppExceptionFilterAttribute)));
 
 builder.Services.AddPersistence(config);
 

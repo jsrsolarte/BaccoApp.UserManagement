@@ -34,7 +34,7 @@ namespace BaccoApp.UserManagement.Application.CreateUser
             }
             else
             {
-                throw new AppException();
+                throw new EntityAlreadyExistException(typeof(User), "Email", request.Email);
             }
         }
     }
