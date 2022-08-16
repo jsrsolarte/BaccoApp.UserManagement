@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master", "develop" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: RafikFarhad/push-to-gcr-github-action@v4.1
+      with:
+        gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text
+        registry: gcr.io
+        project_id: my-awesome-project
+        image_name: user-management-${{ github.ref_name }}
+        image_tag: latest,${{ github.run_number }}
+    
