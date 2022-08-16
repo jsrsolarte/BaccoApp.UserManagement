@@ -2,7 +2,7 @@
 
 namespace BaccoApp.UserManagement.Domain.Ports;
 
-public interface IRepository<T, in TId> : IReadRepository<T, TId> where T : EntityBase<TId>
+public interface IRepository<T> : IReadRepository<T> where T : DomainEntity
 {
     Task AddAsync(T entity, CancellationToken cancellationToken = default);
 

@@ -3,7 +3,7 @@ using BaccoApp.UserManagement.Domain.Entities.Base;
 
 namespace BaccoApp.UserManagement.Domain.Ports;
 
-public interface IReadRepository<T, in TId> where T : IEntityBase<TId>
+public interface IReadRepository<T> where T : DomainEntity
 {
     Task<T?> GetByIdAsync(object id, CancellationToken cancellationToken = default);
 

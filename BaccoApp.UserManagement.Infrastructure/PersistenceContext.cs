@@ -1,5 +1,4 @@
 ﻿using BaccoApp.UserManagement.Domain.Entities;
-using BaccoApp.UserManagement.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -28,11 +27,10 @@ public class PersistenceContext : DbContext
             entity.AddProperty("UpdatedDate", typeof(DateTime));
         }
 
-        modelBuilder.Seed();
         base.OnModelCreating(modelBuilder);
     }
 
-    public override int SaveChanges()
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var entries = ChangeTracker
             .Entries()
@@ -45,7 +43,6 @@ public class PersistenceContext : DbContext
 
             if (entityEntry.State == EntityState.Added) entityEntry.Property("CreatedDate").CurrentValue = DateTime.Now;
         }
-
-        return base.SaveChanges();
+        return base.SaveChangesAsync(cancellationToken);
     }
 }
