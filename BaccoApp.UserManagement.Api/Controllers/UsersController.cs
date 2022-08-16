@@ -3,7 +3,7 @@ using BaccoApp.UserManagement.Application.Users.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BaccoApp.UserManagement.Api
+namespace BaccoApp.UserManagement.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -24,8 +24,4 @@
       <ProjectReference Include="..\BaccoApp.UserManagement.Infrastructure\BaccoApp.UserManagement.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
 </Project>
