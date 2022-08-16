@@ -5,12 +5,53 @@ on:
   push:
     branches: [ "master", "develop" ]
 
+env:
+  PROJECT_NAME: user-management
+  ORGANIZATION: baccoapp
+
 jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Cache SonarCloud workspace
+        uses: actions/cache@v1
+        with:
+          path: ~\.sonar\cache
+          key: ${{ runner.os }}-sonar-cache
+          restore-keys: ${{ runner.os }}-sonar-cache
+          
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+          
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner --version 4.8.0
+          
+      - name: Build
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ env.PROJECT_NAME }}" /o:"${{ env.ORGANIZATION }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build SomeConsoleApplication.sln
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"        
 
   build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v3
     - uses: RafikFarhad/push-to-gcr-github-action@v4.1
@@ -18,7 +59,7 @@ jobs:
         gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text
         registry: us-east1-docker.pkg.dev/baccoapp-358901/gcr-baccoapp
         project_id: baccoapp-358901
-        image_name: user-management-${{ github.ref_name }}
+        image_name: ${{ env.PROJECT_NAME }}-${{ github.ref_name }}
         image_tag: latest,${{ github.run_number }}
         dockerfile: ./BaccoApp.UserManagement.Api/Dockerfile
     
