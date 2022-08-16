@@ -10,7 +10,8 @@ namespace BaccoApp.UserManagement.Application.Users
         public UsersProfile()
         {
             CreateMap<CreateUserCommand, User>();
-            CreateMap<User, UserDto>();
+            CreateMap<User, ListUserDto>();
+            CreateMap<User, DetailUserDto>();
         }
     }
 }

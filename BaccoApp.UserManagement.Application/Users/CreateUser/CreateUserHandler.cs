@@ -8,7 +8,7 @@ using MediatR;
 
 namespace BaccoApp.UserManagement.Application.CreateUser
 {
-    public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserDto>
+    public class CreateUserHandler : IRequestHandler<CreateUserCommand, DetailUserDto>
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -21,16 +21,16 @@ namespace BaccoApp.UserManagement.Application.CreateUser
             _repository = repository;
         }
 
-        public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<DetailUserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var spec = new FindByEmailSpec(request.Email);
+            var spec = new FindUserByEmailSpec(request.Email);
             var userCreated = await _repository.GetBySpecAsync(spec, cancellationToken);
 
             if (userCreated == null)
             {
                 var user = _mapper.Map<User>(request);
                 await _repository.AddAsync(user, cancellationToken);
-                return _mapper.Map<UserDto>(user);
+                return _mapper.Map<DetailUserDto>(user);
             }
             else
             {

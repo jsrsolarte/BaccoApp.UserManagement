@@ -1,6 +1,6 @@
 ﻿namespace BaccoApp.UserManagement.Application.Users.Dtos
 {
-    public class UserDto
+    public class DetailUserDto
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
