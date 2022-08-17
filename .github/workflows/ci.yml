@@ -4,18 +4,13 @@ on:
   push:
     branches: [ "master", "develop" ]
 
-env:
-  SOLUTION_NAME: BaccoApp.UserManagement
-  PROJECT_NAME: baccoapp-user-management
-  ORGANIZATION_SONARCLOUD: baccoapp
-
 jobs:
   sonarcloud:
     uses: ./.github/workflows/sonar-cloud-job.yml
     with:
-      project: ${{ env.PROJECT_NAME }}
-      organization: ${{ env.ORGANIZATION_SONARCLOUD }}
-      solution_name: ${{ env.SOLUTION_NAME }}
+      project: baccoapp-user-management
+      organization: baccoapp
+      solution_name: BaccoApp.UserManagement
     secrets: 
       token: ${{ secrets.SONAR_TOKEN }}
 
@@ -23,6 +18,6 @@ jobs:
     uses: ./.github/workflows/build-push-gcr-job.yml
     needs: [sonarcloud]
     with:
-      project: ${{ env.PROJECT_NAME }}
+      project: baccoapp-user-management
     secrets: 
       gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
