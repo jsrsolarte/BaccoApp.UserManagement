@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BaccoApp.UserManagement.Application.Dtos;
 using BaccoApp.UserManagement.Application.Users.Dtos;
 using BaccoApp.UserManagement.Domain.Ports;
 using BaccoApp.UserManagement.Domain.Specifications;
@@ -7,18 +6,20 @@ using MediatR;
 
 namespace BaccoApp.UserManagement.Application.Users.GetUsers
 {
-    public class GetUsersHandler : IRequestHandler<GetUsersQuery, PaginationResponseDto<ListUserDto>>
+    public class GetUsersHandler : IRequestHandler<GetUsersQuery, PaginationResponse<ListUserDto>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
         public GetUsersHandler(IUserRepository userRepository, IMapper mapper)
         {
+            ArgumentNullException.ThrowIfNull(userRepository, nameof(userRepository));
+            ArgumentNullException.ThrowIfNull(mapper, nameof(mapper));
             _userRepository = userRepository;
             _mapper = mapper;
         }
 
-        public async Task<PaginationResponseDto<ListUserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<PaginationResponse<ListUserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
             var getUserSpec = new GetUsersSpec(request.Search, request.RecordsPerPage, request.Page);
 
@@ -27,7 +28,7 @@ namespace BaccoApp.UserManagement.Application.Users.GetUsers
 
             var recordsDto = _mapper.Map<IEnumerable<ListUserDto>>(records);
 
-            return new PaginationResponseDto<ListUserDto>(request, recordsDto, totalRecords);
+            return new PaginationResponse<ListUserDto>(request, recordsDto, totalRecords);
         }
     }
 }

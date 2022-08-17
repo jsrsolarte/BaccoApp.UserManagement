@@ -15,6 +15,8 @@ namespace BaccoApp.UserManagement.Application.Users.UpdateEditableUser
 
         public UpdateEditableUserHandler(IUserRepository userRepository, IMapper mapper)
         {
+            ArgumentNullException.ThrowIfNull(mapper, nameof(mapper));
+            ArgumentNullException.ThrowIfNull(userRepository, nameof(userRepository));
             _userRepository = userRepository;
             _mapper = mapper;
         }
