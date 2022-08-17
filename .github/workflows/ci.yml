@@ -4,12 +4,8 @@ on:
   push:
     branches: [ "master", "develop" ]
 
-env:
-  SONAR_ENABLED: false
-
 jobs:
   sonarcloud:
-    if: env.SONAR_ENABLED
     uses: ./.github/workflows/sonar-cloud-job.yml
     with:
       project: baccoapp-user-management
