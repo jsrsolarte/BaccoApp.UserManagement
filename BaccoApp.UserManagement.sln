@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaccoApp.UserManagement.Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaccoApp.UserManagement.Domain.Tests", "BaccoApp.UserManagement.Domain.Tests\BaccoApp.UserManagement.Domain.Tests.csproj", "{BBB35B4C-F14A-46F6-829C-948587B5B57A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaccoApp.UserManagement.Application.Tests", "BaccoApp.UserManagement.Application.Tests\BaccoApp.UserManagement.Application.Tests.csproj", "{A23107FB-F2A8-49CB-BDE3-0AD3FC01F8EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BBB35B4C-F14A-46F6-829C-948587B5B57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBB35B4C-F14A-46F6-829C-948587B5B57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBB35B4C-F14A-46F6-829C-948587B5B57A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23107FB-F2A8-49CB-BDE3-0AD3FC01F8EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23107FB-F2A8-49CB-BDE3-0AD3FC01F8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23107FB-F2A8-49CB-BDE3-0AD3FC01F8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23107FB-F2A8-49CB-BDE3-0AD3FC01F8EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

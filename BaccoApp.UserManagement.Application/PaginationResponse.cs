@@ -1,6 +1,6 @@
-﻿namespace BaccoApp.UserManagement.Application.Dtos
+﻿namespace BaccoApp.UserManagement.Application
 {
-    public class PaginationResponseDto<T>
+    public class PaginationResponse<T>
     {
         public int Page { get; set; }
         public int TotalRecords { get; set; }
@@ -16,7 +16,7 @@
 
         public IEnumerable<T> Records { get; set; } = Enumerable.Empty<T>();
 
-        public PaginationResponseDto(PaginationRequestDto request, IEnumerable<T> records, int totalRecords)
+        public PaginationResponse(PaginationRequest request, IEnumerable<T> records, int totalRecords)
         {
             Page = request.Page;
             TotalRecords = totalRecords;

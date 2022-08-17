@@ -1,6 +1,6 @@
-﻿namespace BaccoApp.UserManagement.Application.Dtos
+﻿namespace BaccoApp.UserManagement.Application
 {
-    public class PaginationRequestDto
+    public class PaginationRequest
     {
         public int Page { get; set; } = 1;
         public int RecordsPerPage { get; set; } = 20;
