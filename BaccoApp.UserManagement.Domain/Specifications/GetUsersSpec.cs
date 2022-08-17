@@ -16,6 +16,7 @@ namespace BaccoApp.UserManagement.Domain.Specifications
             Query.Skip((page - 1) * recordsPerPage)
               .Take(recordsPerPage);
         }
+
         public GetUsersSpec(string search)
         {
             if (!string.IsNullOrEmpty(search))

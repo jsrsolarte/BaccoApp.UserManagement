@@ -1,12 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaccoApp.UserManagement.Api", "BaccoApp.UserManagement.Api\BaccoApp.UserManagement.Api.csproj", "{E1725D2B-0790-4AA6-8F75-C932356FD99A}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaccoApp.UserManagement.Api", "BaccoApp.UserManagement.Api\BaccoApp.UserManagement.Api.csproj", "{E1725D2B-0790-4AA6-8F75-C932356FD99A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaccoApp.UserManagement.Domain", "BaccoApp.UserManagement.Domain\BaccoApp.UserManagement.Domain.csproj", "{B7CAA75D-EDE3-422A-8EF2-2B7B5A52E8BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaccoApp.UserManagement.Domain", "BaccoApp.UserManagement.Domain\BaccoApp.UserManagement.Domain.csproj", "{B7CAA75D-EDE3-422A-8EF2-2B7B5A52E8BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaccoApp.UserManagement.Application", "BaccoApp.UserManagement.Application\BaccoApp.UserManagement.Application.csproj", "{50D0F371-D651-4F4C-B0F3-1F6395E3C9A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaccoApp.UserManagement.Application", "BaccoApp.UserManagement.Application\BaccoApp.UserManagement.Application.csproj", "{50D0F371-D651-4F4C-B0F3-1F6395E3C9A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaccoApp.UserManagement.Infrastructure", "BaccoApp.UserManagement.Infrastructure\BaccoApp.UserManagement.Infrastructure.csproj", "{D15B16C6-8FD5-4276-9D84-E74885B2523E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaccoApp.UserManagement.Infrastructure", "BaccoApp.UserManagement.Infrastructure\BaccoApp.UserManagement.Infrastructure.csproj", "{D15B16C6-8FD5-4276-9D84-E74885B2523E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaccoApp.UserManagement.Domain.Tests", "BaccoApp.UserManagement.Domain.Tests\BaccoApp.UserManagement.Domain.Tests.csproj", "{BBB35B4C-F14A-46F6-829C-948587B5B57A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +35,15 @@ Global
 		{D15B16C6-8FD5-4276-9D84-E74885B2523E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D15B16C6-8FD5-4276-9D84-E74885B2523E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D15B16C6-8FD5-4276-9D84-E74885B2523E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBB35B4C-F14A-46F6-829C-948587B5B57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB35B4C-F14A-46F6-829C-948587B5B57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB35B4C-F14A-46F6-829C-948587B5B57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB35B4C-F14A-46F6-829C-948587B5B57A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B5A5C73-DC83-4E96-95C4-35937A88BC0A}
 	EndGlobalSection
 EndGlobal
