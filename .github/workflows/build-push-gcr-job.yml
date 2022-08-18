@@ -23,6 +23,6 @@ jobs:
         gcloud_service_key: ${{ secrets.gcloud_service_key }} # can be base64 encoded or plain text
         registry: us-east1-docker.pkg.dev/baccoapp-358901/gcr-baccoapp
         project_id: baccoapp-358901
-        image_name: ${{ inputd.project }}-${{ github.ref_name }}
+        image_name: ${{ inputs.project }}-${{ github.ref_name }}
         image_tag: latest,${{ inputs.tag }}
         dockerfile: ./BaccoApp.UserManagement.Api/Dockerfile
