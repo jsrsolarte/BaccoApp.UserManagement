@@ -19,7 +19,7 @@ namespace BaccoApp.UserManagement.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ListUserDto>> CreateUser(CreateUserCommand user)
+        public async Task<ActionResult<DetailUserDto>> CreateUser(CreateUserCommand user)
         {
             var userdto = await _mediator.Send(user);
             return CreatedAtAction("CreateUser", userdto);
@@ -33,7 +33,7 @@ namespace BaccoApp.UserManagement.Api.Controllers
         }
 
         [HttpPut("{idUser}")]
-        public async Task<ActionResult<ListUserDto>> UpdateUser(Guid idUser, EditableUserDto editableUser)
+        public async Task<ActionResult<DetailUserDto>> UpdateUser(Guid idUser, EditableUserDto editableUser)
         {
             var response = await _mediator.Send(new UpdateEditableUserCommand
             {
