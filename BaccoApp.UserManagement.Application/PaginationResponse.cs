@@ -14,7 +14,7 @@
             }
         }
 
-        public IEnumerable<T> Records { get; set; } = Enumerable.Empty<T>();
+        public IEnumerable<T> Records { get; set; }
 
         public PaginationResponse(PaginationRequest request, IEnumerable<T> records, int totalRecords)
         {
