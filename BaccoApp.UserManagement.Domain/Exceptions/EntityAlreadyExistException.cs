@@ -10,5 +10,9 @@
         protected EntityAlreadyExistException(string message) : base(message)
         {
         }
+
+        protected EntityAlreadyExistException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+        {
+        }
     }
 }

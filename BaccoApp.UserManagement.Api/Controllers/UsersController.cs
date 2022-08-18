@@ -1,5 +1,7 @@
-﻿using BaccoApp.UserManagement.Application.CreateUser;
+﻿using BaccoApp.UserManagement.Application;
+using BaccoApp.UserManagement.Application.CreateUser;
 using BaccoApp.UserManagement.Application.Users.Dtos;
+using BaccoApp.UserManagement.Application.Users.GetDetailUser;
 using BaccoApp.UserManagement.Application.Users.GetUsers;
 using BaccoApp.UserManagement.Application.Users.UpdateBaseUser;
 using MediatR;
@@ -26,7 +28,7 @@ namespace BaccoApp.UserManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ListUserDto>> GetUsers([FromQuery] GetUsersQuery query)
+        public async Task<ActionResult<PaginationResponse<ListUserDto>>> GetUsers([FromQuery] GetUsersQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);
@@ -40,6 +42,13 @@ namespace BaccoApp.UserManagement.Api.Controllers
                 Id = idUser,
                 User = editableUser
             });
+            return Ok(response);
+        }
+
+        [HttpGet("{idUser}")]
+        public async Task<ActionResult<DetailUserDto>> GetDetailUsers(Guid idUser)
+        {
+            var response = await _mediator.Send(new GetDetailUserQuery { Id = idUser });
             return Ok(response);
         }
     }

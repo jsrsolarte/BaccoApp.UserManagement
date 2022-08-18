@@ -89,5 +89,27 @@ namespace BaccoApp.UserManagement.Api.Tests.Controllers
             response.Result.Should().BeOfType<OkObjectResult>().Which.StatusCode.Should().Be((int)HttpStatusCode.OK);
             response.Result.Should().BeOfType<OkObjectResult>().Which.Value.Should().BeOfType<PaginationResponse<ListUserDto>>();
         }
+
+        [Fact]
+        public async Task GetDetailUserShouldUseMediator_Return200StatusCodeAsync()
+        {
+            //Arrange
+
+            var mediatrMock = _fixture.Freeze<Mock<IMediator>>();
+            mediatrMock.Setup(_ => _.Send(It.IsAny<IRequest<DetailUserDto>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new DetailUserDto());
+
+            var sut = _fixture.Build<UsersController>().OmitAutoProperties().Create();
+
+            //Act
+
+            var response = await sut.GetDetailUsers(Guid.NewGuid());
+
+            //Assert
+
+            mediatrMock.Verify(_ => _.Send(It.IsAny<IRequest<DetailUserDto>>(), It.IsAny<CancellationToken>()), Times.Once);
+            response.Should().NotBeNull();
+            response.Result.Should().BeOfType<OkObjectResult>().Which.StatusCode.Should().Be((int)HttpStatusCode.OK);
+            response.Result.Should().BeOfType<OkObjectResult>().Which.Value.Should().BeOfType<DetailUserDto>();
+        }
     }
 }
