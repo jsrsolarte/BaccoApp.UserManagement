@@ -12,7 +12,7 @@ on:
 jobs:
   build_push:
     name: Build and Push to GCR
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
     - uses: RafikFarhad/push-to-gcr-github-action@v4.1
