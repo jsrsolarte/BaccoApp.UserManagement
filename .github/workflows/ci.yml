@@ -19,5 +19,6 @@ jobs:
     needs: [sonarcloud]
     with:
       project: baccoapp-user-management
+      tag: ${{ github.run_number }}
     secrets: 
       gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
