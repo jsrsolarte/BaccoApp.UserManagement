@@ -2,6 +2,7 @@
 {{- $registrySecret := .Values.registrySecret }}
 {{- $imageRepository := .Values.image.repository }}
 {{- $imageTag := .Values.image.tag }}
+{{- $registryUrl := .Values.registry }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,7 +23,7 @@ spec:
         - name: {{ $registrySecret }}      
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ $imageRepository }}:{{ $imageTag }}
+          image: {{ $registryUrl}}/{{ $imageRepository }}:{{ $imageTag }}
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: {{ $environment }}          

@@ -1,9 +1,10 @@
-environment: develop
+environment: Development
 
-registrySecret: "st-epm-np-aks-p2p"
+registrySecret: "gcr-secret"
+registry : "us-east1-docker.pkg.dev/baccoapp-358901/gcr-baccoapp/baccoapp-358901"
 
 image:
-  repository: baccoapp-user-management-api-develop
+  repository: baccoapp-user-management-api
   tag: "1.0.0"
 
 service:
