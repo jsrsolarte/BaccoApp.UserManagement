@@ -27,16 +27,17 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [build_api]
     steps:
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v0'
+      - id: auth
+        uses: google-github-actions/auth@v0
         with:
-          credentials_json: '${{ secrets.SONAR_TOKEN }}'
+          credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
 
-      - id: 'get-credentials'
-        uses: 'google-github-actions/get-gke-credentials@v0'
+      - id: get-credentials
+        uses: google-github-actions/get-gke-credentials@v0
         with:
-          cluster_name: 'baccoapp-cluster-1'
-          location: 'us-east1'
+          cluster_name: baccoapp-cluster-1
+          location: us-east1
+          project-id: baccoapp-358901
                 
       - name: Helm tool installer
         uses: Azure/setup-helm@v3.3
