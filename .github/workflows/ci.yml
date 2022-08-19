@@ -14,11 +14,11 @@ jobs:
     secrets: 
       token: ${{ secrets.SONAR_TOKEN }}
 
-  build:
+  build_api:
     uses: ./.github/workflows/build-push-gcr-job.yml
     needs: [sonarcloud]
     with:
-      project: baccoapp-user-management
+      project: baccoapp-user-management-api
       tag: ${{ github.run_number }}
     secrets: 
       gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
