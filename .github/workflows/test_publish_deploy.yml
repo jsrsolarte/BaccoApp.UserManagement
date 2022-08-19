@@ -44,4 +44,4 @@ jobs:
         uses: Azure/setup-helm@v3.3
         
       - name: Deploy
-        run: helm upgrade baccoapp-usermanagement-${{ github.ref_name }}-api -n baccoapp-${{ github.ref_name }} -f ./helm-charts/api/values.${{ github.ref_name }}.yaml --set image.repository=baccoapp-user-management-api-${{ github.ref_name }} --set image.tag=${{ github.run_number }} --set version=${{ github.run_number }} -i ./helm-charts/api
+        run: helm upgrade baccoapp-usermanagement-${{ github.ref_name }}-api -n baccoapp-${{ github.ref_name }} -f ./helm-charts/api/values.${{ github.ref_name }}.yaml --set image.repository=baccoapp-user-management-api-${{ github.ref_name }} --set image.tag=${{ github.run_number }} --set version=${{ github.run_number }} -i ./helm-charts/api/Chart.yaml
