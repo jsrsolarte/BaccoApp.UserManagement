@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  push:
+    branches: [ "master", "develop" ]
+
+jobs:
+  sonarcloud:
+    uses: ./.github/workflows/sonar-cloud-job.yml
+    with:
+      project: baccoapp-user-management
+      organization: baccoapp
+      solution_name: BaccoApp.UserManagement
+    secrets: 
+      token: ${{ secrets.SONAR_TOKEN }}
+
+  build_api:
+    uses: ./.github/workflows/build-push-gcr-job.yml
+    needs: [sonarcloud]
+    with:
+      project: baccoapp-user-management-api
+      tag: ${{ github.run_number }}
+    secrets: 
+      gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+      
+  deploy_api:
+    runs-on: ubuntu-22.04
+    needs: [build_api]
+    steps:
+      - name: Get GKE Credentials
+        uses: google-github-actions/get-gke-credentials@v0.8.0
+        with:
+          cluster_name: baccoapp-cluster-1
+          location: us-east1
+          project_id: baccoapp-358901
+          credentials: ${{ secrets.SONAR_TOKEN }}
+          
+      - name: Helm tool installer
+        uses: Azure/setup-helm@v3.3
+        
+      - name: Deploy
+        run: helm upgrade baccoapp-usermanagement-${{ github.ref_name }}-api -n baccoapp-${{ github.ref_name }} -f ./helm-charts/api/values..yaml --set image.repository=baccoapp-user-management-api-${{ github.ref_name }} --set image.tag=${{ github.run_number }} --set version=${{ github.run_number }} -i ./helm-charts/api/
