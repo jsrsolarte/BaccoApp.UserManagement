@@ -1,4 +1,4 @@
-name: ci
+name: test_publish_deploy
 
 on:
   push:
@@ -27,14 +27,17 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [build_api]
     steps:
-      - name: Get GKE Credentials
-        uses: google-github-actions/get-gke-credentials@v0.8.0
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
         with:
-          cluster_name: baccoapp-cluster-1
-          location: us-east1
-          project_id: baccoapp-358901
-          credentials: ${{ secrets.SONAR_TOKEN }}
-          
+          credentials_json: '${{ secrets.SONAR_TOKEN }}'
+
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v0'
+        with:
+          cluster_name: 'baccoapp-cluster-1'
+          location: 'us-east1'
+                
       - name: Helm tool installer
         uses: Azure/setup-helm@v3.3
         
