@@ -27,6 +27,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [build_api]
     steps:
+      - uses: actions/checkout@v3
       - id: auth
         uses: google-github-actions/auth@v0
         with:
@@ -44,4 +45,4 @@ jobs:
         uses: Azure/setup-helm@v3.3
         
       - name: Deploy
-        run: helm upgrade baccoapp-usermanagement-${{ github.ref_name }}-api -n baccoapp-${{ github.ref_name }} -f ./helm-charts/api/values.${{ github.ref_name }}.yaml --set image.repository=baccoapp-user-management-api-${{ github.ref_name }} --set image.tag=${{ github.run_number }} --set version=${{ github.run_number }} -i ./helm-charts/api/Chart.yaml
+        run: helm upgrade baccoapp-usermanagement-${{ github.ref_name }}-api -n baccoapp-${{ github.ref_name }} -f ./helm-charts/api/values.${{ github.ref_name }}.yaml --set image.repository=baccoapp-user-management-api-${{ github.ref_name }} --set image.tag=${{ github.run_number }} --set version=${{ github.run_number }} -i ./helm-charts/api/
