@@ -64,6 +64,8 @@ jobs:
       environment: ${{ needs.env_setup.outputs.environment }}
       dockerfile_path: ${{ needs.env_setup.outputs.dockerfile_path_api }}
       tag: ${{ needs.env_setup.outputs.tag }}
+    secrets:
+      gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
 
 
       
