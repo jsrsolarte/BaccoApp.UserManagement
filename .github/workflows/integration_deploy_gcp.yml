@@ -79,7 +79,7 @@ jobs:
   deploy_gke_api:
     name: deploy api GKE
     needs: [push_gcr_api, env_setup]
-    uses: "jsrsolarte/BaccoApp.Base/.github/workflows/publish-gcr-job.yml@main"
+    uses: "jsrsolarte/BaccoApp.Base/.github/workflows/deploy-helm-gke.yml@main"
     with:
       cluster_name: ${{ needs.env_setup.outputs.cluster_name }}
       location: ${{ needs.env_setup.outputs.location }}
