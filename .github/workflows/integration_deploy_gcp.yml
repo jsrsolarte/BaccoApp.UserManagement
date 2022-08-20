@@ -13,6 +13,9 @@ env:
   DOCKERFILE_PATH_API: ./BaccoApp.UserManagement.Api/Dockerfile
   ENVIRONMENT: ${{ github.ref_name }}
   TAG: ${{ github.run_number }}
+  CLUSTER_NAME: baccoapp-cluster-1
+  LOCATION: us-east1
+  HELM_PATH_API: ./helm-charts/api
 
 jobs:
   env_setup:
@@ -27,6 +30,9 @@ jobs:
       dockerfile_path_api: ${{ steps.env_setup.outputs.dockerfile_path_api }}
       environment: ${{ steps.env_setup.outputs.environment }}
       tag: ${{ steps.env_setup.outputs.tag }}
+      cluster_name: ${{ steps.env_setup.outputs.cluster_name }}
+      location: ${{ steps.env_setup.outputs.location }}
+      helm_path_api: ${{ steps.env_setup.outputs.helm_path_api }}
 
     steps:
       - name: print inputs passed to the reusable workflow
@@ -40,6 +46,9 @@ jobs:
           echo "::set-output name=dockerfile_path_api::$DOCKERFILE_PATH_API"
           echo "::set-output name=environment::$ENVIRONMENT"
           echo "::set-output name=tag::$TAG"
+          echo "::set-output name=cluster_name::$CLUSTER_NAME"
+          echo "::set-output name=location::$LOCATION"
+          echo "::set-output name=helm_path_api::$HELM_PATH_API"
 
   sonar_scanner:
     name: sonar scanner from base repository
@@ -64,5 +73,22 @@ jobs:
       environment: ${{ needs.env_setup.outputs.environment }}
       dockerfile_path: ${{ needs.env_setup.outputs.dockerfile_path_api }}
       tag: ${{ needs.env_setup.outputs.tag }}
+    secrets:
+      gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+
+  deploy_gke_api:
+    name: deploy api GKE
+    needs: [push_gcr_api, env_setup]
+    uses: "jsrsolarte/BaccoApp.Base/.github/workflows/publish-gcr-job.yml@main"
+    with:
+      cluster_name: ${{ needs.env_setup.outputs.cluster_name }}
+      location: ${{ needs.env_setup.outputs.location }}
+      project_id: ${{ needs.env_setup.outputs.project_id }}
+      project: ${{ needs.env_setup.outputs.project }}-api
+      environment: ${{ needs.env_setup.outputs.environment }}
+      application: ${{ needs.env_setup.outputs.application }}
+      tag: ${{ needs.env_setup.outputs.tag }}
+      helm_path: ${{ needs.env_setup.outputs.helm_path_api }}
+
     secrets:
       gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
