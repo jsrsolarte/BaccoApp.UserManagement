@@ -5,7 +5,7 @@ on:
     branches: ["develop", "master"]
 
 env:
-  PROJECT: baccoapp-user-management
+  PROJECT: user-management
   APPLICATION: baccoapp
   SONAR_EXCLUSIONS: '**/Migrations/**,**/Program.cs,**/**.Infrastructure/**'
 
