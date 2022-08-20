@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "::set-output name=project::$PROJECT"
           echo "::set-output name=application::$APPLICATION"
-          echo "::set-output name=application::$SONAR_EXCLUSIONS"
+          echo "::set-output name=sonar_exclusions::$SONAR_EXCLUSIONS"
 
   sonar_scanner:
     name: sonar scanner from base repository
