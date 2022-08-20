@@ -60,7 +60,7 @@ jobs:
       registry: ${{ needs.env_setup.outputs.registry }}
       project_id: ${{ needs.env_setup.outputs.project_id }}
       application: ${{ needs.env_setup.outputs.application }}
-      project: ${{ needs.env_setup.outputs.project }}
+      project: ${{ needs.env_setup.outputs.project }}-api
       environment: ${{ needs.env_setup.outputs.environment }}
       dockerfile_path: ${{ needs.env_setup.outputs.dockerfile_path_api }}
       tag: ${{ needs.env_setup.outputs.tag }}
