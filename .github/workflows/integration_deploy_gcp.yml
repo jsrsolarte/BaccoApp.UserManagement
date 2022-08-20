@@ -7,8 +7,8 @@ on:
 env:
   PROJECT: user-management
   APPLICATION: baccoapp
-  SONAR_EXCLUSIONS: '**/Migrations/**,**/Program.cs,**/**.Infrastructure/**'
-  REGISTRY: 'us-east1-docker.pkg.dev/baccoapp-358901/gcr-baccoapp'
+  SONAR_EXCLUSIONS: "**/Migrations/**,**/Program.cs,**/**.Infrastructure/**"
+  REGISTRY: "us-east1-docker.pkg.dev/baccoapp-358901/gcr-baccoapp"
   PROJECT_ID: baccoapp-358901
   DOCKERFILE_PATH_API: ./BaccoApp.UserManagement.Api/Dockerfile
   ENVIRONMENT: ${{ github.ref_name }}
@@ -44,7 +44,7 @@ jobs:
   sonar_scanner:
     name: sonar scanner from base repository
     needs: [env_setup]
-    uses: 'jsrsolarte/BaccoApp.Base/.github/workflows/sonarcloud-scanner-dotnet-job.yml@main'
+    uses: "jsrsolarte/BaccoApp.Base/.github/workflows/sonarcloud-scanner-dotnet-job.yml@main"
     with:
       project: ${{ needs.env_setup.outputs.project }}
       application: ${{ needs.env_setup.outputs.application }}
@@ -55,7 +55,7 @@ jobs:
   push_gcr_api:
     name: push gcr api
     needs: [sonar_scanner, env_setup]
-    uses: 'jsrsolarte/BaccoApp.Base/.github/workflows/publish-gcr-job.yml@main'
+    uses: "jsrsolarte/BaccoApp.Base/.github/workflows/publish-gcr-job.yml@main"
     with:
       registry: ${{ needs.env_setup.outputs.registry }}
       project_id: ${{ needs.env_setup.outputs.project_id }}
@@ -66,9 +66,3 @@ jobs:
       tag: ${{ needs.env_setup.outputs.tag }}
     secrets:
       gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
-
-
-      
-
-
-      
