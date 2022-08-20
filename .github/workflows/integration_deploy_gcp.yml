@@ -55,7 +55,7 @@ jobs:
   push_gcr_api:
     name: push gcr api
     needs: [sonar_scanner, env_setup]
-    uses: 'jsrsolarte/BaccoApp.Base/.github/workflows/sonarcloud-scanner-dotnet-job.yml@main'
+    uses: 'jsrsolarte/BaccoApp.Base/.github/workflows/publish-gcr-job.yml@main'
     with:
       registry: ${{ needs.env_setup.outputs.registry }}
       project_id: ${{ needs.env_setup.outputs.project_id }}
