@@ -28,7 +28,7 @@ jobs:
   sonar_scanner:
     name: sonar scanner from base repository
     needs: [env_setup]
-    uses: 'jsrsolarte/BaccoApp.Base/github/workflows/sonarcloud-scanner-dotnet-job.yml@main'
+    uses: 'jsrsolarte/BaccoApp.Base/.github/workflows/sonarcloud-scanner-dotnet-job.yml@main'
     with:
       project: ${{ needs.env_setup.outputs.project }}
       application: ${{ needs.env_setup.outputs.application }}
