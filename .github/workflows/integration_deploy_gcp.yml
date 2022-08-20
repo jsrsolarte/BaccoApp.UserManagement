@@ -8,6 +8,11 @@ env:
   PROJECT: user-management
   APPLICATION: baccoapp
   SONAR_EXCLUSIONS: '**/Migrations/**,**/Program.cs,**/**.Infrastructure/**'
+  REGISTRY: 'us-east1-docker.pkg.dev/baccoapp-358901/gcr-baccoapp'
+  PROJECT_ID: baccoapp-358901
+  DOCKERFILE_PATH_API: ./BaccoApp.UserManagement.Api/Dockerfile
+  ENVIRONMENT: ${{ github.ref_name }}
+  TAG: ${{ github.run_number }}
 
 jobs:
   env_setup:
@@ -17,6 +22,12 @@ jobs:
       project: ${{ steps.env_setup.outputs.project }}
       application: ${{ steps.env_setup.outputs.application }}
       sonar_exclusions: ${{ steps.env_setup.outputs.sonar_exclusions }}
+      registry: ${{ steps.env_setup.outputs.registry }}
+      project_id: ${{ steps.env_setup.outputs.project_id }}
+      dockerfile_path_api: ${{ steps.env_setup.outputs.dockerfile_path_api }}
+      environment: ${{ steps.env_setup.outputs.environment }}
+      tag: ${{ steps.env_setup.outputs.tag }}
+
     steps:
       - name: print inputs passed to the reusable workflow
         id: env_setup
@@ -24,6 +35,11 @@ jobs:
           echo "::set-output name=project::$PROJECT"
           echo "::set-output name=application::$APPLICATION"
           echo "::set-output name=sonar_exclusions::$SONAR_EXCLUSIONS"
+          echo "::set-output name=registry::$REGISTRY"
+          echo "::set-output name=project_id::$PROJECT_ID"
+          echo "::set-output name=dockerfile_path_api::$DOCKERFILE_PATH_API"
+          echo "::set-output name=environment::$ENVIRONMENT"
+          echo "::set-output name=tag::$TAG"
 
   sonar_scanner:
     name: sonar scanner from base repository
@@ -35,6 +51,22 @@ jobs:
       sonar_exclusions: ${{ needs.env_setup.outputs.sonar_exclusions }}
     secrets:
       sonar_token: ${{ secrets.SONAR_TOKEN }}
+
+  push_gcr_api:
+    name: push gcr api
+    needs: [sonar_scanner, env_setup]
+    uses: 'jsrsolarte/BaccoApp.Base/.github/workflows/sonarcloud-scanner-dotnet-job.yml@main'
+    with:
+      registry: ${{ needs.env_setup.outputs.registry }}
+      project_id: ${{ needs.env_setup.outputs.project_id }}
+      application: ${{ needs.env_setup.outputs.application }}
+      project: ${{ needs.env_setup.outputs.project }}
+      environment: ${{ needs.env_setup.outputs.environment }}
+      dockerfile_path_api: ${{ needs.env_setup.outputs.dockerfile_path_api }}
+      tag: ${{ needs.env_setup.outputs.tag }}
+
+
+      
 
 
       
