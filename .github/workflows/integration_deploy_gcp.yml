@@ -1,0 +1,40 @@
+name: integration and deploy to gcp workflow
+
+on:
+  push:
+    branches: ["develop", "master"]
+
+env:
+  PROJECT: baccoapp-user-management
+  APPLICATION: baccoapp
+  SONAR_EXCLUSIONS: '**/Migrations/**,**/Program.cs,**/**.Infrastructure/**'
+
+jobs:
+  env_setup:
+    name: setup environment variables
+    runs-on: ubuntu-22.04
+    outputs:
+      project: ${{ steps.env_setup.outputs.project }}
+      application: ${{ steps.env_setup.outputs.application }}
+      sonar_exclusions: ${{ steps.env_setup.outputs.sonar_exclusions }}
+    steps:
+      - name: print inputs passed to the reusable workflow
+        id: env_setup
+        run: |
+          echo "::set-output name=project::$PROJECT"
+          echo "::set-output name=application::$APPLICATION"
+          echo "::set-output name=application::$SONAR_EXCLUSIONS"
+
+  sonar_scanner:
+    name: sonar scanner from base repository
+    needs: [env_setup]
+    uses: 'jsrsolarte/BaccoApp.Base/github/workflows/sonarcloud-scanner-dotnet-job.yml'
+    with:
+      project: ${{ needs.env_setup.outputs.project }}
+      application: ${{ needs.env_setup.outputs.application }}
+      sonar_exclusions: ${{ needs.env_setup.outputs.sonar_exclusions }}
+    secrets:
+      sonar_token: ${{ secrets.SONAR_TOKEN }}
+
+
+      
