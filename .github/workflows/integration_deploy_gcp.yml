@@ -92,3 +92,4 @@ jobs:
 
     secrets:
       gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
