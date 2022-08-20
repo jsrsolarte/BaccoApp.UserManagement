@@ -62,7 +62,7 @@ jobs:
       application: ${{ needs.env_setup.outputs.application }}
       project: ${{ needs.env_setup.outputs.project }}
       environment: ${{ needs.env_setup.outputs.environment }}
-      dockerfile_path_api: ${{ needs.env_setup.outputs.dockerfile_path_api }}
+      dockerfile_path: ${{ needs.env_setup.outputs.dockerfile_path_api }}
       tag: ${{ needs.env_setup.outputs.tag }}
 
 
